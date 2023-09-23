@@ -272,6 +272,60 @@ def Profile():
     else:
         return redirect(url_for('StudentLogin'))
     
+@app.route("/UploadDocument", methods=['POST'])
+def UploadDocument():
+    if 'user' in session:
+        userId = session['user'][0]
+        userName = session['user'][1]
+        userStudentId = session['user'][2]
+        resume = request.files['resume-pdf-upload']
+        indemnity = request.files['indemnity-pdf-upload']
+        company = request.files['company-pdf-upload']
+        parent = request.files['parent-pdf-upload']
+        cursor = db_conn.cursor()
+        insert_sql = "INSERT INTO leave_application (Employee_ID, Submission_Date, Reason_of_Leave, Total_Day) VALUES (%s, %s, %s, %s)"
+        #if resume.filename != "":
+        try:
+            resume_name_in_s3 = userName + "_" + userStudentId + "_resume"
+            parent_name_in_s3 = userName + "_" + userStudentId + "_parent"
+            indemnity_name_in_s3 = userName + "_" + userStudentId + "_indemnity"
+            company_name_in_s3 = userName + "_" + userStudentId + "_company"
+            s3 = boto3.resource('s3')
+
+   
+
+            try:
+                print('pass0')
+                bucket = s3.Bucket(custombucket)
+
+                # Upload objects to the S3 bucket
+                bucket.put_object(Key=resume_name_in_s3, Body=resume)
+                bucket.put_object(Key=company_name_in_s3, Body=company)
+                bucket.put_object(Key=indemnity_name_in_s3, Body=indemnity)
+                bucket.put_object(Key=parent_name_in_s3, Body=parent)
+                print('pass1')
+                bucket_location = boto3.client('s3').get_bucket_location(Bucket=custombucket)
+                s3_location = (bucket_location['LocationConstraint'])
+                print('pass2')
+                if s3_location is None:
+                    s3_location = ''
+                else:
+                    s3_location = '-' + s3_location
+
+                print('pass3')
+                object_url = "https://s3{0}.amazonaws.com/{1}/{2}".format(
+                    s3_location,
+                    custombucket,
+                    resume_name_in_s3)
+
+            except Exception as e:
+                return str(e)
+
+        finally:
+            cursor.close()
+
+    else:
+        return redirect(url_for('Login'))
 
 @app.route("/CompanyDetailsPage/<string:id>")
 def CompanyDetailsPage(id):
@@ -296,15 +350,20 @@ def StudentLoginProcess():
     student = cursor.fetchone()
     cursor.close()  
 
+    
     if student:
-        session["user"] = student
-        print("Login success")
+        if student[17] != 'pending':
+            session["user"] = student
+            print("Login success")
+            return redirect(url_for('Documents'))
+        else:
+            flash('Account is still pending for approval')
 
     else:
-        print("Login failed")
-        return redirect(url_for('StudentLogin'))
+        print("Invalid Email Address or Password")
+        
 
-    return redirect(url_for('Documents'))
+    return redirect(url_for('StudentLogin'))
 
 @app.route("/StudentSignUpProcess", methods=['POST'])
 def StudentSignUpProcess():
@@ -352,7 +411,7 @@ def registration():
 
 @app.route("/AddCompany", methods=['POST'])
 def AddCompany():
-    print('1')
+  
     company_name = request.form['name']
     email = request.form['email']
     contact = request.form['contactNum']
@@ -362,17 +421,36 @@ def AddCompany():
     entry_req = request.form['entryReq']
     image = request.files['company_image_file']
     
-    insert_sql = "INSERT INTO Company (name,email,contactNum,address,description,workDes,entryReq) VALUES (%s, %s, %s, %s, %s, %s, %s)"
+    insert_sql = "INSERT INTO Company (name,email,contactNum,address,description,workDes,entryReq,logo) VALUES (%s, %s, %s, %s, %s, %s, %s,%s)"
     cursor = db_conn.cursor()
-    print('2')
     if image.filename == "":
-        app.logger.info('yes')
         return "Please select a file"
+    
+    try:
+        company_image_file_name_in_s3 = "company-name-" + str(company_name) + "_image_file"
+        s3 = boto3.resource('s3')
+        print("Data inserted in MariaDB RDS... uploading image to S3...")
+        s3.Bucket(custombucket).put_object(Key=company_image_file_name_in_s3, Body=image)
+        bucket_location = boto3.client('s3').get_bucket_location(Bucket=custombucket)
+        s3_location = (bucket_location['LocationConstraint'])
+
+        if s3_location is None:
+            s3_location = ''
+        else:
+            s3_location = '-' + s3_location
+
+            object_url = "https://s3{0}.amazonaws.com/{1}/{2}".format(
+                s3_location,
+                custombucket,
+                company_image_file_name_in_s3)
+
+    except Exception as e:
+        return str(e)
     
     try:
         app.logger.info('success')
 
-        cursor.execute(insert_sql, (company_name, email, contact, address, company_des, work_des, entry_req))
+        cursor.execute(insert_sql, (company_name, email, contact, address, company_des, work_des, entry_req,object_url))
         flash('Company Registered Successfully')
 
         db_conn.commit()
@@ -381,24 +459,8 @@ def AddCompany():
         company_image_file_name_in_s3 = "company-name-" + str(company_name) + "_image_file"
         s3 = boto3.resource('s3')
         
-        try:
-            print("Data inserted in MariaDB RDS... uploading image to S3...")
-            s3.Bucket(custombucket).put_object(Key=company_image_file_name_in_s3, Body=image)
-            bucket_location = boto3.client('s3').get_bucket_location(Bucket=custombucket)
-            s3_location = (bucket_location['LocationConstraint'])
-
-            if s3_location is None:
-                s3_location = ''
-            else:
-                s3_location = '-' + s3_location
-
-            object_url = "https://s3{0}.amazonaws.com/{1}/{2}".format(
-                s3_location,
-                custombucket,
-                company_image_file_name_in_s3)
-
-        except Exception as e:
-            return str(e)
+        
+        
         
     finally:
         cursor.close()
