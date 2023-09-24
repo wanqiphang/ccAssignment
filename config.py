@@ -4,3 +4,4 @@ custompass = "Bait3273"
 customdb = "ccAssignment"
 custombucket = "ccassignment-bucket"     
 customregion = "us-east-1"
+
