@@ -250,6 +250,12 @@ def approveStudent(id):
 
 
 # Debbie 
+@app.route("/Logout")
+def Logout():
+    session.pop('user', None)
+    flash("Logout succesfully")
+    return redirect(url_for('Home'))
+
 @app.route('/StudentLogin')
 def StudentLogin():
     return render_template('StudentLogin.html')
