@@ -96,15 +96,19 @@
       </a>
     </div>
   </header>
-  <section class="u-clearfix u-section-1" id="sec-f31b" style="display: flex;" >
-    <div style="position:absolute;width:100%;height:100%;background: url('../static/images/web-bg.jpeg') no-repeat;background-size:cover;background-position: center;filter: blur(2px);-webkit-filter: blur(2px);"></div>
+  <section class="u-clearfix u-section-1" id="sec-f31b" style="display: flex;">
+    <div
+      style="position:absolute;width:100%;height:100%;background: url('../static/images/web-bg.jpeg') no-repeat;background-size:cover;background-position: center;filter: blur(2px);-webkit-filter: blur(2px);">
+    </div>
     <div class="u-absolute-hcenter u-border-1 u-border-grey-25 u-expanded-width u-line u-line-horizontal u-line-1">
     </div>
-    
-    <div class="u-border-1 u-border-grey-75 u-form u-form-1" style="background-color: rgba(0,0,0,0.7);border-radius: 5%;color: white;margin: auto;">
-      <h4 class="u-text u-text-default u-text-1" style="text-align: center; margin-left: auto; margin-right: auto;margin-top: 40px;">
+
+    <div class="u-border-1 u-border-grey-75 u-form u-form-1"
+      style="background-color: rgba(0,0,0,0.7);border-radius: 5%;color: white;margin: auto;">
+      <h4 class="u-text u-text-default u-text-1"
+        style="text-align: center; margin-left: auto; margin-right: auto;margin-top: 40px;">
         Student Login</h4>
-      <form action="/StudentLoginProcess"  method="POST" enctype="multipart/form-data" class="u-form-spacing-10"
+      <form action="/StudentLoginProcess" method="POST" enctype="multipart/form-data" class="u-form-spacing-10"
         style="padding: 44px;justify-content: center;">
         <div class="u-form-email u-form-group" style="margin-bottom: 20px;">
           <label for="email-bf1d" class="u-label">Email</label>
@@ -116,7 +120,19 @@
           <input type="text" placeholder="Enter Password" id="text-1504" name="password"
             class="u-input u-input-rectangle">
         </div>
-        <button type="submit" class="u-btn u-button-style" style="width:40% ;margin-left:auto;margin-right:auto">Login</button>
+        <button type="submit" class="u-btn u-button-style"
+          style="width:40% ;margin-left:auto;margin-right:auto">Login</button>
+
+        {% with messages = get_flashed_messages() %}
+        {% if messages %}
+        {% for message in messages %}
+        <div class="popup-msg" role="alert">
+          <span class="msg">{{ message }}</span>
+          <input type="button" class="close-msg" value=&#10006 onclick=delete_flash(this)>
+        </div>
+        {% endfor %}
+        {% endif %}
+        {% endwith %}
       </form>
     </div>
   </section>

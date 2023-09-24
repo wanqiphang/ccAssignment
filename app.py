@@ -5,7 +5,7 @@ import boto3
 from config import *
 
 app = Flask(__name__)
-app.secret_key = "Admin"
+app.secret_key = "Assignment"
 
 bucket = custombucket
 region = customregion
@@ -250,6 +250,12 @@ def approveStudent(id):
 
 
 # Debbie 
+@app.route("/Logout")
+def Logout():
+    session.pop('user', None)
+    flash("Logout succesfully")
+    return redirect(url_for('Home'))
+
 @app.route('/StudentLogin')
 def StudentLogin():
     return render_template('StudentLogin.html')
@@ -445,29 +451,13 @@ def AddCompany():
                 company_image_file_name_in_s3)
 
     except Exception as e:
-        return str(e)
-    
-    try:
-        app.logger.info('success')
-
-        cursor.execute(insert_sql, (company_name, email, contact, address, company_des, work_des, entry_req,object_url))
-        flash('Company Registered Successfully')
-
-        db_conn.commit()
-        
-        # Uplaod image file in S3 #
-        company_image_file_name_in_s3 = "company-name-" + str(company_name) + "_image_file"
-        s3 = boto3.resource('s3')
-        
-        
-        
-        
+        return str(e)   
+            
     finally:
         cursor.close()
         
     # return redirect(url_for('Jobs'))
     return render_template('Registration.html')
-
 # Job
 @app.route("/Jobs", methods=['GET'])
 def Jobs():
