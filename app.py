@@ -427,8 +427,11 @@ def AddCompany():
     entry_req = request.form['entryReq']
     image = request.files['company_image_file']
     
-    insert_sql = "INSERT INTO Company (name,email,contactNum,address,description,workDes,entryReq,logo) VALUES (%s, %s, %s, %s, %s, %s, %s,%s)"
+    insert_sql = "INSERT INTO Company (name,email,contactNum,address,description,workDes,entryReq,logo) VALUES (%s, %s, %s, %s, %s, %s, %s, %s)"
     cursor = db_conn.cursor()
+    
+    object_url = None  # Initialize object_url
+    
     if image.filename == "":
         return "Please select a file"
     
@@ -445,17 +448,17 @@ def AddCompany():
         else:
             s3_location = '-' + s3_location
 
-            object_url = "https://s3{0}.amazonaws.com/{1}/{2}".format(
-                s3_location,
-                custombucket,
-                company_image_file_name_in_s3)
+        object_url = "https://s3{0}.amazonaws.com/{1}/{2}".format(
+            s3_location,
+            custombucket,
+            company_image_file_name_in_s3)
 
     except Exception as e:
         return str(e)   
             
     finally:
         try:
-            cursor.execute(insert_sql, (company_name, email, contact, address, company_des, work_des, entry_req,object_url))
+            cursor.execute(insert_sql, (company_name, email, contact, address, company_des, work_des, entry_req, object_url))
             flash('Company Registered Successfully')
 
             db_conn.commit()
