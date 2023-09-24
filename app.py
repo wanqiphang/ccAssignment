@@ -18,13 +18,17 @@ db_conn = connections.Connection(
     db=customdb
 )
 output = {}
-table = 'Admin', 'Supervisor', 'Student'
+table = 'Admin', 'Supervisor', 'Student', 'Job', 'StudentApplication'
 studentTable = 'Student'
 companyTable = 'Company'
 
 #Home 
 @app.route('/')
 def Home():
+    return render_template('index.html')
+
+@app.route('/index')
+def index():
     return render_template('index.html')
 
 
@@ -623,6 +627,33 @@ def Form():
     cursor.close()
 
     return render_template('Form.html', StudentInfo=data)
+
+#Portfolio 
+@app.route('/Debbie')
+def Debbie():
+    return render_template('Debbie.html')
+
+@app.route('/SiHua')
+def SiHua():
+    return render_template('SiHua.html')
+
+@app.route('/WanQi')
+def WanQi():
+    return render_template('WanQi.html')
+
+@app.route('/XinLe')
+def XinLe():
+    return render_template('XinLe.html')
+
+@app.route('/HuiShan')
+def HuiShan():
+    return render_template('HuiShan.html')
+
+@app.route('/Ricky')
+def Ricky():
+    return render_template('Ricky.html')
+
+
 
 if __name__ == '__main__':
     app.run(host='0.0.0.0', port=80, debug=True)

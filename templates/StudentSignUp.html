@@ -15,7 +15,8 @@
 
   <title>Student SignUp</title>
 
-  <link rel="stylesheet" type="text/css" href="{{ url_for ('static', filename='style/nicepage-stud.css')}}" media="screen">
+  <link rel="stylesheet" type="text/css" href="{{ url_for ('static', filename='style/nicepage-stud.css')}}"
+    media="screen">
   <link rel="stylesheet" href="{{ url_for ('static', filename='style/SignUp.css')}}" media="screen">
   <link rel="icon" href="https://www.tarc.edu.my/images/tarIco.ico" type="image/x-icon">
   <link id="u-theme-google-font" rel="stylesheet"
@@ -30,6 +31,12 @@
 		"@type": "Organization",
 		"name": ""
 }</script>
+
+  <style>
+    .u-nav-item {
+      font-size: medium;
+    }
+  </style>
 </head>
 
 <body class="u-body u-xl-mode" data-lang="en">
@@ -51,7 +58,7 @@
           </svg>
         </a>
       </div>
-      <div class="u-custom-menu u-nav-container">
+      <div class="u-custom-menu u-nav-container" style="margin-right: 210px;">
         <ul class="u-nav u-unstyled u-nav-1">
           <li class="u-nav-item"><a
               class="u-button-style u-nav-link u-text-active-palette-1-base u-text-hover-palette-2-base"
@@ -61,13 +68,15 @@
               href="{{ url_for('StudentSignUp')}}" style="padding: 10px 20px;">Sign Up</a></li>
         </ul>
       </div>
-      <div class="u-custom-menu u-nav-container-collapse">
+      <div class="u-custom-menu u-nav-container-collapse" style="margin-right: 210px;">
         <div class="u-black u-container-style u-inner-container-layout u-opacity u-opacity-95 u-sidenav">
           <div class="u-inner-container-layout u-sidenav-overflow">
             <div class="u-menu-close"></div>
             <ul class="u-align-center u-nav u-popupmenu-items u-unstyled u-nav-2">
-              <li class="u-nav-item"><a class="u-button-style u-nav-link" href="{{ url_for('StudentLogin')}}">Login</a></li>
-              <li class="u-nav-item"><a class="u-button-style u-nav-link" href="{{ url_for('StudentSignUp')}}">Sign Up</a></li>
+              <li class="u-nav-item"><a class="u-button-style u-nav-link" href="{{ url_for('StudentLogin')}}">Login</a>
+              </li>
+              <li class="u-nav-item"><a class="u-button-style u-nav-link" href="{{ url_for('StudentSignUp')}}">Sign
+                  Up</a></li>
             </ul>
           </div>
         </div>
@@ -76,7 +85,7 @@
     </nav>
     <a href="https://nicepage.com"
       class="u-border-2 u-border-black u-border-no-left u-border-no-right u-border-no-top u-image u-logo u-image-1"
-      data-image-width="416" data-image-height="121">
+      data-image-width="416" data-image-height="121" style="margin-left: 260px;">
       <img src="{{ url_for ('static', filename='images/header.png')}}" class="u-logo-image u-logo-image-1">
     </a>
   </header>
@@ -109,8 +118,7 @@
             </div>
             <div class="u-form-group u-form-group-2">
               <label for="text-ee4b" class="u-label">IC</label>
-              <input type="text" placeholder="xxxxxxxxxxxx" id="text-ee4b" name="ic"
-                class="u-input u-input-rectangle">
+              <input type="text" placeholder="xxxxxxxxxxxx" id="text-ee4b" name="ic" class="u-input u-input-rectangle">
               <div class="icMsg">* mark: Your IC will become your login password.</div>
             </div>
             <div class="u-form-email u-form-group">
@@ -147,10 +155,13 @@
               <label for="select-9f4c" class="u-label">Programme</label>
               <div class="u-form-select-wrapper">
                 <select id="select-9f4c" name="programme" class="u-input u-input-rectangle">
-                  <option value="Bachelor of Software Enginnering" data-calc="1">Bachelor of Software Enginnering</option>
-                  <option value="Bachelor of Information Technology (Honours) in Information Security" data-calc="2">Bachelor of Information Technology (Honours) in Information Security
+                  <option value="Bachelor of Software Enginnering" data-calc="1">Bachelor of Software Enginnering
                   </option>
-                  <option value="Bachelor of Information Technology (Honours) in Internet Technology" data-calc="3">Bachelor of Information Technology (Honours) in Internet Technology
+                  <option value="Bachelor of Information Technology (Honours) in Information Security" data-calc="2">
+                    Bachelor of Information Technology (Honours) in Information Security
+                  </option>
+                  <option value="Bachelor of Information Technology (Honours) in Internet Technology" data-calc="3">
+                    Bachelor of Information Technology (Honours) in Internet Technology
                   </option>
                 </select>
                 <svg class="u-caret u-caret-svg" version="1.1" id="Layer_1" xmlns="http://www.w3.org/2000/svg"
@@ -175,7 +186,8 @@
               <input type="text" id="text-97f4" name="ucEmail" class="u-input u-input-rectangle"
                 placeholder="eg. xxxxx@tarc.edu.my">
             </div>
-            <button type="submit" class="u-btn u-button-style" style="width:40% ;margin-left:auto;margin-right:auto">Login</button>
+            <button type="submit" class="u-btn u-button-style"
+              style="width:40% ;margin-left:auto;margin-right:auto">Login</button>
           </form>
         </div>
       </div>
