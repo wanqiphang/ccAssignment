@@ -64,6 +64,29 @@
     .btn-logout {
       color: inherit;
     }
+
+    .createBtn {
+      background-color: #478ac9;
+      color: white;
+      margin-top: 20px;
+      position: relative;
+      padding: 10px 30px 10px 30px;
+      border: none;
+    }
+
+    .createBtn:hover {
+      text-decoration: none;
+      color: white;
+      cursor: pointer;
+    }
+
+    #uploadButton {
+      padding: 5px 10px;
+    }
+
+    .u-nav-item {
+      font-size: medium;
+    }
   </style>
 
 </head>
@@ -90,7 +113,7 @@
           </svg>
         </a>
       </div>
-      <div class="u-custom-menu u-nav-container">
+      <div class="u-custom-menu u-nav-container" style="margin-right: 210px;">
         <ul class="u-nav u-unstyled u-nav-1">
           <li class="u-nav-item">
             <a class="u-button-style u-nav-link u-text-active-palette-1-base u-text-hover-palette-2-base"
@@ -130,16 +153,16 @@
         </div>
         <div class="u-black u-menu-overlay u-opacity u-opacity-70"></div>
       </div>
-    </nav><img class="u-image u-image-contain u-image-default u-image-2"
+    </nav>
+    <img class="u-image u-image-contain u-image-default u-image-2"
       src="{{ url_for('static', filename='images/TARUMT1.jpg') }}" alt="" data-image-width="416"
       data-image-height="121">
-    <div class="u-border-1 u-border-grey-dark-1 u-expanded-width u-line u-line-horizontal u-line-1"></div>
   </header>
 
 
   <section class="u-clearfix u-section-1" id="sec-49e2">
     <div class="u-clearfix u-sheet u-sheet-1">
-      <h2 class="u-text u-text-default u-text-1">Company Registration</h2>
+      <h4 class="u-text u-text-default u-text-1" style="margin-top: 20px; text-decoration: underline;">Company Registration</h4>
       <div class="u-form u-form-1">
         <form action="/AddCompany" method="POST" style="padding: 10px;" enctype="multipart/form-data">
           <div class="u-form-group u-form-name">
@@ -178,7 +201,7 @@
               class="u-input u-input-rectangle">
           </div>
 
-          <div class="u-form-group u-form-group-6">
+          <div class="u-form-group u-form-group-6" style="margin-top: 10px;">
             <label for="text-bc5e" class="u-label">Upload Company Logo</label>
             <input type="file" id="fileInput" name="company_image_file" style="display: none;">
             <label for="fileInput" id="fileNameLabel" name="company_image_file">No file selected</label>

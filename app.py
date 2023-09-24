@@ -5,7 +5,7 @@ import boto3
 from config import *
 
 app = Flask(__name__)
-app.secret_key = "Admin"
+app.secret_key = "Assignment"
 
 bucket = custombucket
 region = customregion

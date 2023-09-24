@@ -56,22 +56,59 @@
             </svg>
           </a>
         </div>
+        <div class="u-custom-menu u-nav-container">
+          <ul class="u-nav u-unstyled u-nav-1">
+            <li class="u-nav-item"><a
+                class="u-button-style u-nav-link u-text-active-palette-1-base u-text-hover-palette-2-base"
+                href="{{ url_for('StudentLogin')}}" style="padding: 10px 20px;">Student</a>
+            </li>
+            <li class="u-nav-item"><a
+                class="u-button-style u-nav-link u-text-active-palette-1-base u-text-hover-palette-2-base"
+                href="{{ url_for('SupervisorLogin')}}" style="padding: 10px 20px;">Supervisor</a>
+            </li>
+            <li class="u-nav-item"><a
+                class="u-button-style u-nav-link u-text-active-palette-1-base u-text-hover-palette-2-base"
+                href="{{ url_for('CompanyLogin')}}" style="padding: 10px 20px;">Company</a>
+            </li>
+            <li class="u-nav-item"><a
+                class="u-button-style u-nav-link u-text-active-palette-1-base u-text-hover-palette-2-base"
+                href="{{ url_for('AdminLogin')}}" style="padding: 10px 20px;">Admin</a>
+            </li>
+          </ul>
+        </div>
+        <div class="u-custom-menu u-nav-container-collapse">
+          <div class="u-black u-container-style u-inner-container-layout u-opacity u-opacity-95 u-sidenav">
+            <div class="u-inner-container-layout u-sidenav-overflow">
+              <div class="u-menu-close"></div>
+              <ul class="u-align-center u-nav u-popupmenu-items u-unstyled u-nav-2">
+                <li class="u-nav-item"><a class="u-button-style u-nav-link"
+                    href="{{ url_for('StudentLogin')}}">Student</a>
+                </li>
+                <li class="u-nav-item"><a class="u-button-style u-nav-link"
+                    href="{{ url_for('SupervisorLogin')}}">Supervisor</a>
+                </li>
+                <li class="u-nav-item"><a class="u-button-style u-nav-link"
+                    href="{{ url_for('CompanyLogin')}}">Company</a>
+                </li>
+                <li class="u-nav-item"><a class="u-button-style u-nav-link"
+                    href="{{ url_for('AdminLogin')}}">Admin</a>
+                </li>
+              </ul>
+            </div>
+          </div>
+          <div class="u-black u-menu-overlay u-opacity u-opacity-70"></div>
+        </div>
       </nav>
       <img src="{{ url_for('static', filename='images/logo-removebg-preview1.png')}}" alt="" data-image-width="416"
         data-image-height="121">
     </div>
   </header>
 
-  <section>
-    <a href="{{ url_for('StudentLogin')}}"> Student</a>
-    <a href="{{ url_for('SupervisorLogin')}}"> Supervisor</a>
-    <a href="{{ url_for('CompanyLogin')}}"> Company</a>
-    <a href="{{ url_for('AdminLogin')}}"> Admin</a>
-  </section>
-
   <section style="padding:0.5%">
-    <div style="background: url('../static/images/tarcIndex.jpg') no-repeat;background-position:bottom;background-size:cover;min-height: 60vh;">
-        
+    <div
+      style="background: url('../static/images/tarcIndex.jpg') no-repeat;background-position:bottom;background-size:cover;min-height: 60vh;"
+      class="tarImage">
+
     </div>
   </section>
 
@@ -91,6 +128,12 @@
       <span>Website Builder Software</span>
     </a>.
   </section>
+
+  <style>
+    .tarImage {
+      bottom: -8px;
+    }
+  </style>
 
 </body>
 
