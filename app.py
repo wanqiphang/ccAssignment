@@ -117,7 +117,7 @@ def AddSupervisor():
     email = request.form['email']
     contactNum = request.form['contactNum']
     
-    insert_sql = "INSERT INTO Supervisor VALUES (%s, %s, %s, %s)"
+    insert_sql = "INSERT INTO Supervisor (staffID, name, email, contactNum) VALUES (%s, %s, %s, %s)"
     cursor = db_conn.cursor()
     cursor.execute(insert_sql, (staffID, name, email, contactNum))
     flash('Supervisor Added Successfully')
