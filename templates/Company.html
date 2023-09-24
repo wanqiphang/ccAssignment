@@ -106,19 +106,25 @@
     <div class="u-absolute-hcenter u-border-1 u-border-grey-25 u-expanded-width u-line u-line-horizontal u-line-1">
     </div>
     <h3 class="u-align-center u-custom-font u-font-montserrat u-text u-text-1">COMPANY LIST</h3>
-    <div class="u-list u-list-1">
+    <div class="u-list u-list-1" style="width: 70%;">
       <div class="u-repeater u-repeater-1">
 
         {% for company in companies %}
         <div class="u-container-style u-list-item u-repeater-item">
           <div class="u-container-layout u-similar-container u-container-layout-9">
-            <img alt="" class="u-expanded-width u-image u-image-default u-image-9" data-image-width="2000"
-              data-image-height="1333" src="images/90fc53c9.svg">
-            <h3 class="u-text u-text-default u-text-18">{{company[1]}}</h3>
-            <p class="u-text u-text-19">{{company[4]}}</p>
-            <a href="/CompanyDetailsPage/{{company[0]}}"
-              class="u-active-none u-border-2 u-border-hover-palette-2-base u-border-no-left u-border-no-right u-border-no-top u-border-palette-2-light-1 u-btn u-button-style u-hover-none u-none u-text-body-color u-btn-9">Learn
-              More</a>
+            <div style="border: 1px solid #efefef;">
+              <img alt="" class="u-expanded-width u-image u-image-default u-image-9" data-image-width="2000"
+                data-image-height="1333" src="images/90fc53c9.svg">
+
+              <div style="padding: 5% 3%;">
+                <h4 class="">{{company[1]}}</h3>
+                <p class="u-text u-text-19">{{company[4]}}</p>
+                <a href="/CompanyDetailsPage/{{company[0]}}"
+                  style="margin-left:auto;margin-right:0"
+                  class="u-active-none u-border-2 u-border-hover-palette-2-base u-border-no-left u-border-no-right u-border-no-top u-border-palette-2-light-1 u-btn u-button-style u-hover-none u-none u-text-body-color u-btn-9">Learn
+                  More</a>
+              </div>
+            </div>
           </div>
         </div>
         {% endfor %}
