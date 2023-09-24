@@ -454,7 +454,17 @@ def AddCompany():
         return str(e)   
             
     finally:
-        cursor.close()
+        try:
+            cursor.execute(insert_sql, (company_name, email, contact, address, company_des, work_des, entry_req,object_url))
+            flash('Company Registered Successfully')
+
+            db_conn.commit()
+
+        except Exception as e:
+            return str(e)   
+
+        finally:
+            cursor.close()
         
     # return redirect(url_for('Jobs'))
     return render_template('Registration.html')
